@@ -59,6 +59,13 @@ octahedron = [
     [(-1,0,0), (0,0,-1), (0,-1,0)],
 ]
 
+square = [
+    [(1,1,1), (-1,1,1), (1,1,-1), (-1,1,-1)],
+    [(1,1,1),(1,1,-1),(1,-1,1),(1,-1,-1)],
+    [(-1,1,1),(-1,1,-1),(-1,-1,-1),(-1,-1,1)],
+    [(-1,-1,1),(-1,-1,-1),(1,-1,-1),(1,-1,1)]
+]
+
 render(octahedron, color_map=matplotlib.cm.get_cmap('Blues'), lines=black)
 
-render(sphere_approx(3), lines='k')
+#render(sphere_approx(3), lines='k')
