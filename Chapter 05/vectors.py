@@ -9,18 +9,40 @@ from math import sqrt, sin, cos, acos, atan2
 #     by_coordinate = zip(*vectors)
 #     coordinate_sums = [sum(coords) for coords in by_coordinate]
 #     return tuple(coordinate_sums)
+class VectorSizeError(Exception):
+    pass
 
 def add(*vectors):
-    return tuple(map(sum,zip(*vectors)))
+    try:
+        it = iter(vectors)
+        the_len = len(next(it))
+        if not all(len(l) == the_len for l in it):
+            raise VectorSizeError
+        else:
+            return tuple(map(sum,zip(*vectors)))
+    except VectorSizeError:
+        print("Invalid vector sizes for add operation")
 
 def subtract(v1,v2):
-    return tuple(v1-v2 for (v1,v2) in zip(v1,v2))
+    try:
+        if len(v1) != len(v2):
+            raise VectorSizeError
+        else:
+            return tuple(v1-v2 for (v1,v2) in zip(v1,v2))
+    except VectorSizeError:
+        print("Invalid vector sizes for subtraction operation")
 
 def length(v):
     return sqrt(sum([coord ** 2 for coord in v]))
 
 def dot(u,v):
-    return sum([coord1 * coord2 for coord1,coord2 in zip(u,v)])
+    try:
+        if len(u) != len(v):
+            raise VectorSizeError
+        else:
+            return sum([coord1 * coord2 for coord1,coord2 in zip(u,v)])
+    except VectorSizeError:
+        print("Invalid vector sizes for dot operation")
 
 def distance(v1,v2):
     return length(subtract(v1,v2))
